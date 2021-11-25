@@ -6,11 +6,18 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/31 23:42:38 by jkosaka           #+#    #+#             */
-/*   Updated: 2021/11/25 18:49:31 by jkosaka          ###   ########.fr       */
+/*   Updated: 2021/11/25 21:03:22 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
+
+static void	init_arg(t_arg *arg)
+{
+	arg->s = 0;
+	arg->width = -1;
+	arg->precision = -1;
+}
 
 char *read_specifier(t_arg *arg, char *ptr)
 {
@@ -41,14 +48,8 @@ char *read_specifier(t_arg *arg, char *ptr)
 	return (ptr);
 }
 
-static void	init_arg(t_arg *arg)
-{
-	arg->s = 0;
-	arg->width = -1;
-	arg->precision = -1;
-}
 
-static int	put_arg(t_arg *arg, va_list *ap)
+static int	print_arg(t_arg *arg, va_list *ap)
 {
 	if (arg->s == 'c')
 		return (0); // todo
@@ -72,16 +73,16 @@ static int	put_arg(t_arg *arg, va_list *ap)
 static int	ft_printf_core(char *ptr, va_list ap)
 {
 	int		ret;
-	t_arg	*arg;
+	t_arg	arg;
 
 	ret = 0;
 	while (*ptr)
 	{
 		if (*ptr == '%')
 		{
-			init_arg(arg);
-			ptr = read_specifier(arg, ptr);
-			ret += put_arg(arg, &ap);
+			init_arg(&arg);	
+			ptr = read_specifier(&arg, ptr);
+			ret += print_arg(&arg, &ap);
 			continue ;
 		}
 		ret += ft_putchar(*ptr);

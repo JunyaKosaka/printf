@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 15:08:07 by jkosaka           #+#    #+#             */
-/*   Updated: 2021/11/25 15:08:33 by jkosaka          ###   ########.fr       */
+/*   Updated: 2021/11/25 20:36:18 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ printf(__VA_ARGS__)
 
 int	main(void)
 {
-	F("hoge\n");
+	// F("foo\n");
+	F("%s\n", "bar");
 	return (0);
 }
 

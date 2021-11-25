@@ -6,7 +6,7 @@
 #    By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/25 18:34:44 by jkosaka           #+#    #+#              #
-#    Updated: 2021/11/25 18:37:23 by jkosaka          ###   ########.fr        #
+#    Updated: 2021/11/25 20:35:08 by jkosaka          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,10 +19,10 @@ all: ft_printf
 test:
 	./test.sh
 
-ft_printf: libftprintf.c
+ft_printf: $(SRCS)
 	gcc -D TEST -D FT_PRINTF $(SRCS) -o ft_printf
 
-printf: libftprintf.c
+printf: $(SRCS)
 	gcc -Wno-format -D TEST $(SRCS) -o printf
 
 clean:
