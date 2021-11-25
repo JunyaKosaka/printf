@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/31 23:42:38 by jkosaka           #+#    #+#             */
-/*   Updated: 2021/11/25 21:03:22 by jkosaka          ###   ########.fr       */
+/*   Updated: 2021/11/25 23:59:20 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,13 @@ char *read_specifier(t_arg *arg, char *ptr)
 static int	print_arg(t_arg *arg, va_list *ap)
 {
 	if (arg->s == 'c')
-		return (0); // todo
+		return (ft_print_c(arg, ap)); // todo
 	if (arg->s == 's')
 		return (ft_print_s(arg, ap)); // todo
 	if (arg->s == 'p')
 		return (0); // todo
 	if (arg->s == 'd')
-		return (0); // todo
+		return (ft_print_d(arg, ap)); // todo
 	if (arg->s == 'i')
 		return (0); // todo
 	if (arg->s == 'u')
