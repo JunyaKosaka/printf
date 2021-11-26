@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 23:21:59 by jkosaka           #+#    #+#             */
-/*   Updated: 2021/11/26 17:54:30 by jkosaka          ###   ########.fr       */
+/*   Updated: 2021/11/26 20:01:12 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	ft_print_d(t_spec *spc, va_list *ap)
 	d_len += padding;
 	while (!(spc->has_left) && d_len < spc->min_width)
 	{
-		ret += ft_putchar(' ');
+		ret += ft_putspace(spc);
 		spc->min_width--;
 	}
 	if (spc->precision == 0 && d == 0)	

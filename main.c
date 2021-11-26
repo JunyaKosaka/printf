@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 15:08:07 by jkosaka           #+#    #+#             */
-/*   Updated: 2021/11/26 18:02:28 by jkosaka          ###   ########.fr       */
+/*   Updated: 2021/11/26 20:22:28 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,15 @@
 
 #ifdef FT_PRINTF
 #define F(...)\
-ft_printf(__VA_ARGS__)
+res = ft_printf(__VA_ARGS__)
 #else
 #define F(...)\
-printf(__VA_ARGS__)
+res = printf(__VA_ARGS__)
 #endif
 
 int	main(void)
 {
+	int	res;
 	F("[foo]\n");
 	F("[%s]\n", "bar");
 	F("[%.5s]\n", "foo");
@@ -38,9 +39,13 @@ int	main(void)
 	F("[%d]\n", INT_MAX);
 	F("[%10.0d]\n", 0);
 	F("[%10.5d]\n", 123);
-	// F("[%010d]\n", 123);
+	F("[%010d]\n", 123);
+	F("[%-10.5d]\n", 123);
+	F("[%*d]\n", 5, 123);
+	printf("res is %d\n", res);
+
 	
-	// F("[%-10.5d]\n", 123);
+	// F("[%p]\n", )
 	// F("[%*.*d]\n", 10, 5, 234);
 	int x = 123;
 	// F("[%p]\n", &x);

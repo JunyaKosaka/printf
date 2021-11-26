@@ -3,5 +3,6 @@
 		"cspdiux",
 		"ft",
 		"striteri"
-	]
+	],
+	"C_Cpp.dimInactiveRegions": false
 }

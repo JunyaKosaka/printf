@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/31 23:42:43 by jkosaka           #+#    #+#             */
-/*   Updated: 2021/11/26 18:01:17 by jkosaka          ###   ########.fr       */
+/*   Updated: 2021/11/26 20:00:52 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct s_spec
 	int	c;
 	int	min_width;
 	int	precision;
-	int	has_left;
+	int	has_left; // 変数名 left justifyか検討
 	int	has_zero;
 	int	has_plus;
 	int	has_space;
@@ -40,6 +40,7 @@ int	ft_print_c(t_spec *spc, va_list *ap);
 
 int	ft_print_d(t_spec *spc, va_list *ap);
 int	ft_putchar(char c);
+int	ft_putspace(t_spec *spc);
 int	ft_get_digits(int x);
 
 #endif // LIBFTPRINTF_H_
