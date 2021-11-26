@@ -6,12 +6,12 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/31 23:42:43 by jkosaka           #+#    #+#             */
-/*   Updated: 2021/11/25 23:59:37 by jkosaka          ###   ########.fr       */
+/*   Updated: 2021/11/26 18:01:17 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFTPRINTF_H_
-# define LIBFTPRINTF_H_
+#ifndef LIBFTPRINTF_H
+# define LIBFTPRINTF_H
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -21,18 +21,24 @@
 # include <stdio.h>
 # include "./libft/libft.h"
 
-typedef struct	s_arg
+typedef struct s_spec
 {
-	int	s;
-	int	width;
+	int	c;
+	int	min_width;
 	int	precision;
-}	t_arg;
+	int	has_left;
+	int	has_zero;
+	int	has_plus;
+	int	has_space;
+	int	has_sharp;
+}	t_spec;
 
-int	ft_printf(const char * restrict format, ...);
-int	ft_print_s(t_arg *arg, va_list *ap);
-int	ft_print_c(t_arg *arg, va_list *ap);
+int	ft_printf(const char *restrict format, ...);
+char *ft_parse_spec(t_spec *spc, char *ptr, va_list *ap);
+int	ft_print_s(t_spec *spc, va_list *ap);
+int	ft_print_c(t_spec *spc, va_list *ap);
 
-int	ft_print_d(t_arg *arg, va_list *ap);
+int	ft_print_d(t_spec *spc, va_list *ap);
 int	ft_putchar(char c);
 int	ft_get_digits(int x);
 

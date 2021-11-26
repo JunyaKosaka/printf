@@ -6,74 +6,49 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/31 23:42:38 by jkosaka           #+#    #+#             */
-/*   Updated: 2021/11/25 23:59:20 by jkosaka          ###   ########.fr       */
+/*   Updated: 2021/11/26 18:01:17 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-static void	init_arg(t_arg *arg)
+static int	print_spec(t_spec *spc, va_list *ap)
 {
-	arg->s = 0;
-	arg->width = -1;
-	arg->precision = -1;
-}
-
-char *read_specifier(t_arg *arg, char *ptr)
-{
-	ptr++; // %の分
-	while (*ptr)
-	{
-		if (ft_isdigit(*ptr))
-		{
-			arg->width = ft_atoi(ptr);
-			ptr += ft_get_digits(arg->width);
-		}
-		if (*ptr == '.')
-		{
-			ptr++;
-			if (ft_isdigit(*ptr))
-			{
-				arg->precision = ft_atoi(ptr);
-				ptr += ft_get_digits(arg->precision);
-			}
-		}
-		if (ft_strchr("cspdiuxX%", *ptr))  // %対応
-		{
-			arg->s = *ptr;
-			return (++ptr);
-		}
-		ptr++;
-	}
-	return (ptr);
-}
-
-
-static int	print_arg(t_arg *arg, va_list *ap)
-{
-	if (arg->s == 'c')
-		return (ft_print_c(arg, ap)); // todo
-	if (arg->s == 's')
-		return (ft_print_s(arg, ap)); // todo
-	if (arg->s == 'p')
+	if (spc->c == 'c')
+		return (ft_print_c(spc, ap));
+	if (spc->c == 's')
+		return (ft_print_s(spc, ap));
+	if (spc->c == 'p')
 		return (0); // todo
-	if (arg->s == 'd')
-		return (ft_print_d(arg, ap)); // todo
-	if (arg->s == 'i')
+	if (spc->c == 'd')
+		return (ft_print_d(spc, ap));
+	if (spc->c == 'i')
 		return (0); // todo
-	if (arg->s == 'u')
+	if (spc->c == 'u')
 		return (0); // todo
-	if (arg->s == 'x')
+	if (spc->c == 'x')
 		return (0); // todo
-	if (arg->s == 'X')
+	if (spc->c == 'X')
 		return (0); // todo
 	return (0);
+}
+
+static void	init_arg(t_spec *spc)
+{
+	spc->c = 0;
+	spc->min_width = -1;
+	spc->precision = -1;
+	spc->has_left = 0;
+	spc->has_zero = 0;
+	spc->has_sharp = 0;
+	spc->has_space = 0;
+	spc->has_plus = 0;
 }
 
 static int	ft_printf_core(char *ptr, va_list ap)
 {
 	int		ret;
-	t_arg	arg;
+	t_spec	arg;
 
 	ret = 0;
 	while (*ptr)
@@ -81,8 +56,8 @@ static int	ft_printf_core(char *ptr, va_list ap)
 		if (*ptr == '%')
 		{
 			init_arg(&arg);	
-			ptr = read_specifier(&arg, ptr);
-			ret += print_arg(&arg, &ap);
+			ptr = ft_parse_spec(&arg, ptr, &ap);
+			ret += print_spec(&arg, &ap);
 			continue ;
 		}
 		ret += ft_putchar(*ptr);
