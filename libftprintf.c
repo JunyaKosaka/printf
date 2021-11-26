@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/31 23:42:38 by jkosaka           #+#    #+#             */
-/*   Updated: 2021/11/27 00:40:38 by jkosaka          ###   ########.fr       */
+/*   Updated: 2021/11/27 01:58:41 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ static int	ft_printf_core(char *ptr, va_list ap)
 		{
 			init_spc(&spc);
 			ptr = ft_parse_spec(&spc, ptr, &ap);
+			if (!ptr)
+				return (-1);
 			if (*ptr != '%')
 			{
 				ret += print_spec(&spc, &ap);
