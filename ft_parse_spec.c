@@ -14,17 +14,21 @@
 
 static char	*parse_flag(t_spec *spc, char **ptr, va_list *ap)
 {
-	if (**ptr == '-')
+	// 0 - # + [ ]の順番が異なる場合
+	while (strchr("0-#+ ", **ptr))
 	{
-		spc->has_left = 1;
+		if (**ptr == '0')
+			spc->has_zero = 1;
+		else if (**ptr == '-')
+			spc->has_left = 1;
+		else if (**ptr == '#')
+			spc->has_sharp = 1;
+		else if (**ptr == '+')
+			spc->has_plus = 1;
+		else if (**ptr == ' ')
+			spc->has_space = 1;
 		(*ptr)++;
 	}
-	if (**ptr == '0')
-	{
-		spc->has_zero = 1;
-		(*ptr)++;
-	}
-	// sharp
 	return (*ptr);
 }
 
@@ -33,7 +37,7 @@ static char	*parse_min_width(t_spec *spc, char **ptr, va_list *ap)
 	if (ft_isdigit(**ptr))
 	{
 		spc->min_width = ft_atoi(*ptr);
-		*ptr += ft_get_digits(spc->min_width);
+		*ptr += ft_get_digits(spc->min_width, 10);
 	}
 	else if (**ptr == '*')
 	{
@@ -51,7 +55,12 @@ static char	*parse_dot(t_spec *spc, char **ptr, va_list *ap)
 		if (ft_isdigit(**ptr))
 		{
 			spc->precision = ft_atoi(*ptr);
-			*ptr += ft_get_digits(spc->precision);
+			*ptr += ft_get_digits(spc->precision, 10);
+		}
+		else if (**ptr == '*')
+		{
+			spc->precision = va_arg(*ap, int);
+			(*ptr)++;
 		}
 	}
 	return (*ptr);
@@ -65,10 +74,15 @@ char *ft_parse_spec(t_spec *spc, char *ptr, va_list *ap)
 	ptr = parse_dot(spc, &ptr, ap);
 	if (spc->has_left || spc->precision >= 0)
 		spc->has_zero = 0;
-	if (ft_strchr("cspdiuxX%", *ptr))  // handle %
+	if (ft_strchr("cspdiuxX", *ptr))  // handle %
 	{
 		spc->c = *ptr;
 		return (++ptr);
 	}
+	// if (*ptr == '%')
+	// {
+	// 	ft_putchar('%');
+	// 	ptr++;
+	// }
 	return (ptr);
 }

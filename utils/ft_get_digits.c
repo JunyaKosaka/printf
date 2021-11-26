@@ -6,13 +6,13 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 18:17:29 by jkosaka           #+#    #+#             */
-/*   Updated: 2021/11/25 18:30:45 by jkosaka          ###   ########.fr       */
+/*   Updated: 2021/11/26 23:42:59 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libftprintf.h"
 
-int	ft_get_digits(int x)
+int	ft_get_digits(int x, int base)
 {
 	int		ret;
 	long	num;
@@ -24,7 +24,7 @@ int	ft_get_digits(int x)
 		num *= -1;
 		ret++;
 	}
-	if (num / 10)
-		ret += ft_get_digits(num / 10);
+	if (num / base)
+		ret += ft_get_digits(num / base, base);
 	return (ret);
 }

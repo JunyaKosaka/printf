@@ -6,7 +6,17 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 00:35:43 by jkosaka           #+#    #+#             */
-/*   Updated: 2021/11/26 00:35:44 by jkosaka          ###   ########.fr       */
+/*   Updated: 2021/11/26 22:57:07 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libftprintf.h"
+
+int	ft_print_p(t_spec *spc, va_list *ap)
+{
+	int	ret;
+	
+
+	ret = 0;
+	return (ret);
+}
