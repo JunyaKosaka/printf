@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 23:21:59 by jkosaka           #+#    #+#             */
-/*   Updated: 2021/11/26 23:42:16 by jkosaka          ###   ########.fr       */
+/*   Updated: 2021/11/27 00:34:09 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ static int	putint(int n, int padding)
 
 	ret = 0;
 	num = n;
-	// INT_MIN
 	if (num < 0)
 	{
 		ret += ft_putchar('-');
@@ -33,12 +32,33 @@ static int	putint(int n, int padding)
 	return (ret);
 }
 
+static int	print_d_core(t_spec *spc, int d, int d_len, int padding)
+{
+	int	ret;
+
+	ret = 0;
+	while (!(spc->has_left) && d_len < spc->min_width)
+	{
+		ret += ft_putspace(spc);
+		spc->min_width--;
+	}
+	if (spc->precision == 0 && d == 0)
+		return (ret);
+	ret += putint(d, padding);
+	while (d_len < spc->min_width)
+	{
+		ret += ft_putspace(spc);
+		spc->min_width--;
+	}
+	return (ret);
+}
+
 int	ft_print_d(t_spec *spc, va_list *ap)
 {
 	int		ret;
+	int		d;
 	int		d_len;
 	int		padding;
-	int		d;
 
 	ret = 0;
 	d = va_arg(*ap, int);
@@ -51,18 +71,6 @@ int	ft_print_d(t_spec *spc, va_list *ap)
 	else if (d >= 0 && d_len < spc->precision)
 		padding = spc->precision - d_len;
 	d_len += padding;
-	while (!(spc->has_left) && d_len < spc->min_width)
-	{
-		ret += ft_putspace(spc);
-		spc->min_width--;
-	}
-	if (spc->precision == 0 && d == 0)	
-		return (ret);
-	ret += putint(d, padding);
-	while (d_len < spc->min_width)
-	{
-		ret += ft_putchar(' ');
-		spc->min_width--;
-	}
+	ret += print_d_core(spc, d, d_len, padding);
 	return (ret);
 }

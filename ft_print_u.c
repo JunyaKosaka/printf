@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 00:35:55 by jkosaka           #+#    #+#             */
-/*   Updated: 2021/11/26 23:42:24 by jkosaka          ###   ########.fr       */
+/*   Updated: 2021/11/27 00:42:37 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,27 @@ static int	putuint(unsigned int num, int padding)
 	if (num / 10)
 		ret += putuint((num / 10), 0);
 	ret += ft_putchar('0' + (num % 10));
+	return (ret);
+}
+
+static int	print_u_core(t_spec *spc, unsigned int u, int u_len, int padding)
+{
+	int	ret;
+
+	ret = 0;
+	while (!(spc->has_left) && u_len < spc->min_width)
+	{
+		ret += ft_putspace(spc);
+		spc->min_width--;
+	}
+	if (spc->precision == 0 && u == 0)
+		return (ret);
+	ret += putuint(u, padding);
+	while (u_len < spc->min_width)
+	{
+		ret += ft_putchar(' ');
+		spc->min_width--;
+	}
 	return (ret);
 }
 
@@ -41,18 +62,6 @@ int	ft_print_u(t_spec *spc, va_list *ap)
 	if (u_len < spc->precision)
 		padding = spc->precision - u_len;
 	u_len += padding;
-	while (!(spc->has_left) && u_len < spc->min_width)
-	{
-		ret += ft_putspace(spc);
-		spc->min_width--;
-	}
-	if (spc->precision == 0 && u == 0)	
-		return (ret);
-	ret += putuint(u, padding);
-	while (u_len < spc->min_width)
-	{
-		ret += ft_putchar(' ');
-		spc->min_width--;
-	}
+	ret += print_u_core(spc, u, u_len, padding);
 	return (ret);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_parse_spec.c                                     :+:      :+:    :+:   */
+/*   ft_parse_spec.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 15:28:22 by jkosaka           #+#    #+#             */
-/*   Updated: 2021/11/26 17:48:09 by jkosaka          ###   ########.fr       */
+/*   Updated: 2021/11/27 00:12:11 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static char	*parse_flag(t_spec *spc, char **ptr, va_list *ap)
 {
-	// 0 - # + [ ]の順番が異なる場合
 	while (strchr("0-#+ ", **ptr))
 	{
 		if (**ptr == '0')
@@ -51,7 +50,7 @@ static char	*parse_dot(t_spec *spc, char **ptr, va_list *ap)
 {
 	if (**ptr == '.')
 	{
-		(*ptr)++;  // handle *
+		(*ptr)++;
 		if (ft_isdigit(**ptr))
 		{
 			spc->precision = ft_atoi(*ptr);
@@ -66,23 +65,18 @@ static char	*parse_dot(t_spec *spc, char **ptr, va_list *ap)
 	return (*ptr);
 }
 
-char *ft_parse_spec(t_spec *spc, char *ptr, va_list *ap)
+char	*ft_parse_spec(t_spec *spc, char *ptr, va_list *ap)
 {
-	ptr++; // %の分
+	ptr++;
 	ptr = parse_flag(spc, &ptr, ap);
 	ptr = parse_min_width(spc, &ptr, ap);
 	ptr = parse_dot(spc, &ptr, ap);
 	if (spc->has_left || spc->precision >= 0)
 		spc->has_zero = 0;
-	if (ft_strchr("cspdiuxX", *ptr))  // handle %
+	if (ft_strchr("cspdiuxX", *ptr))
 	{
 		spc->c = *ptr;
 		return (++ptr);
 	}
-	// if (*ptr == '%')
-	// {
-	// 	ft_putchar('%');
-	// 	ptr++;
-	// }
 	return (ptr);
 }
