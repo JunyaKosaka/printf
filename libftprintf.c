@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/31 23:42:38 by jkosaka           #+#    #+#             */
-/*   Updated: 2021/11/27 01:58:41 by jkosaka          ###   ########.fr       */
+/*   Updated: 2021/11/27 18:42:14 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ static int	print_spec(t_spec *spc, va_list *ap)
 	if (spc->c == 's')
 		return (ft_print_s(spc, ap));
 	if (spc->c == 'p')
-		return (0);
-		// return (ft_print_p(spc, ap));
+		return (ft_print_p(spc, ap));
 	if (spc->c == 'd')
 		return (ft_print_d(spc, ap));
 	if (spc->c == 'i')
@@ -54,19 +53,22 @@ static int	ft_printf_core(char *ptr, va_list ap)
 	ret = 0;
 	while (*ptr)
 	{
+		if (*ptr == '%' && *(ptr+1) == '%')
+		{
+			ret += ft_putchar('%'); // 確認
+			ptr += 2;
+			continue ;
+		}
 		if (*ptr == '%')
 		{
 			init_spc(&spc);
 			ptr = ft_parse_spec(&spc, ptr, &ap);
 			if (!ptr)
 				return (-1);
-			if (*ptr != '%')
-			{
-				ret += print_spec(&spc, &ap);
-				continue ;
-			}
+			ret += print_spec(&spc, &ap);
+			continue ;
 		}
-		ret += ft_putchar(*ptr);
+		ret += ft_putchar(*ptr); // %d%d　対応
 		ptr++;
 	}
 	return (ret);

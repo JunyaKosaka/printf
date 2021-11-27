@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 00:35:55 by jkosaka           #+#    #+#             */
-/*   Updated: 2021/11/27 00:33:49 by jkosaka          ###   ########.fr       */
+/*   Updated: 2021/11/27 16:17:15 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	print_lx_core(t_spec *spc, unsigned int u, int u_len, int padding)
 	ret += putlxint(u, padding);
 	while (u_len < spc->min_width)
 	{
-		ret += ft_putchar(' ');
+		ret += ft_putspace(spc);
 		spc->min_width--;
 	}
 	return (ret);
