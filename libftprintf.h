@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/31 23:42:43 by jkosaka           #+#    #+#             */
-/*   Updated: 2021/11/27 17:16:51 by jkosaka          ###   ########.fr       */
+/*   Updated: 2021/11/27 20:23:47 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	ft_print_p(t_spec *spc, va_list *ap);
 int	ft_print_x(t_spec *spc, va_list *ap);
 int	ft_print_lx(t_spec *spc, va_list *ap);
 int	ft_putchar(char c);
+int	ft_putstr(char *s);
 int	ft_putspace(t_spec *spc);
 int	ft_get_digits(long x, int base);
 

@@ -6,13 +6,13 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 00:35:43 by jkosaka           #+#    #+#             */
-/*   Updated: 2021/11/27 18:53:46 by jkosaka          ###   ########.fr       */
+/*   Updated: 2021/11/27 20:31:16 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-static int	putxint(unsigned long num, int padding)
+static int	put_x(unsigned long num, int padding)
 {
 	int	ret;
 
@@ -20,7 +20,7 @@ static int	putxint(unsigned long num, int padding)
 	while (padding-- > 0)
 		ret += ft_putchar('0');
 	if (num / 16)
-		ret += putxint((num / 16), 0);
+		ret += put_x((num / 16), 0);
 	ret += ft_putchar("0123456789abcdef"[num % 16]);
 	return (ret);
 }
@@ -37,7 +37,8 @@ static int	print_p_core(t_spec *spc, unsigned long p, int p_len, int padding)
 	}
 	if (spc->precision == 0 && p == 0)
 		return (ret);
-	ret += putxint(p, padding);
+	ret += ft_putstr("0x");
+	ret += put_x(p, padding);
 	while (p_len < spc->min_width)
 	{
 		ret += ft_putspace(spc);
@@ -62,6 +63,7 @@ int	ft_print_p(t_spec *spc, va_list *ap)
 	else if (p >= 0 && p_len < spc->precision)
 		padding = spc->precision - p_len;
 	p_len += padding;
+	spc->min_width -= 2;
 	ret += print_p_core(spc, p, p_len, padding);
 	return (ret);
 }

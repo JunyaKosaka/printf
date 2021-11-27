@@ -6,13 +6,13 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 00:35:55 by jkosaka           #+#    #+#             */
-/*   Updated: 2021/11/27 16:17:15 by jkosaka          ###   ########.fr       */
+/*   Updated: 2021/11/27 20:28:30 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-static int	putlxint(unsigned int num, int padding)
+static int	put_lx(unsigned int num, int padding)
 {
 	int	ret;
 
@@ -20,7 +20,7 @@ static int	putlxint(unsigned int num, int padding)
 	while (padding-- > 0)
 		ret += ft_putchar('0');
 	if (num / 16)
-		ret += putlxint((num / 16), 0);
+		ret += put_lx((num / 16), 0);
 	ret += ft_putchar("0123456789ABCDEF"[num % 16]);
 	return (ret);
 }
@@ -37,7 +37,9 @@ static int	print_lx_core(t_spec *spc, unsigned int u, int u_len, int padding)
 	}
 	if (spc->precision == 0 && u == 0)
 		return (ret);
-	ret += putlxint(u, padding);
+	if (spc->has_sharp)
+		ret += ft_putstr("0X");
+	ret += put_lx(u, padding);
 	while (u_len < spc->min_width)
 	{
 		ret += ft_putspace(spc);
@@ -62,6 +64,8 @@ int	ft_print_lx(t_spec *spc, va_list *ap)
 	if (u_len < spc->precision)
 		padding = spc->precision - u_len;
 	u_len += padding;
+	if (spc->has_sharp)
+		spc->min_width -= 2;
 	ret += print_lx_core(spc, u, u_len, padding);
 	return (ret);
 }
