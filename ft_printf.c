@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/31 23:42:38 by jkosaka           #+#    #+#             */
-/*   Updated: 2021/11/28 01:09:01 by jkosaka          ###   ########.fr       */
+/*   Updated: 2021/11/28 18:36:49 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,11 @@ static int	ft_printf_core(char *ptr, va_list ap)
 	ret = 0;
 	while (*ptr)
 	{
-		if (*ptr == '%' && *(ptr+1) == '%')
+		if (*ptr == '%' && *(ptr + 1) == '%')
 		{
 			ret += ft_putchar('%');
 			ptr += 2;
+			continue ;
 		}
 		else if (*ptr == '%')
 		{
@@ -65,12 +66,10 @@ static int	ft_printf_core(char *ptr, va_list ap)
 			if (!ptr)
 				return (-1);
 			ret += print_spec(&spc, &ap);
+			continue ;
 		}
-		else
-		{
-			ret += ft_putchar(*ptr);
-			ptr++;
-		}
+		ret += ft_putchar(*ptr);
+		ptr++;
 	}
 	return (ret);
 }

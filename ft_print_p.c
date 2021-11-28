@@ -6,13 +6,15 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 00:35:43 by jkosaka           #+#    #+#             */
-/*   Updated: 2021/11/28 17:06:50 by jkosaka          ###   ########.fr       */
+/*   Updated: 2021/11/28 18:28:22 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	put_x(unsigned long long num, int padding)
+typedef unsigned long long	t_ull;
+
+static int	put_x(t_ull num, int padding)
 {
 	int	ret;
 
@@ -25,7 +27,7 @@ static int	put_x(unsigned long long num, int padding)
 	return (ret);
 }
 
-static int	print_p_core(t_spec *spc, unsigned long long p, int p_len, int padding)
+static int	print_p_core(t_spec *spc, t_ull p, int p_len, int padding)
 {
 	int	ret;
 
@@ -54,14 +56,14 @@ static int	print_p_core(t_spec *spc, unsigned long long p, int p_len, int paddin
 
 int	ft_print_p(t_spec *spc, va_list *ap)
 {
-	int			ret;
-	unsigned long long	p;
-	int			p_len;
-	int			padding;
+	int		ret;
+	t_ull	p;
+	int		p_len;
+	int		padding;
 
 	ret = 0;
-	p = (unsigned long long)va_arg(*ap, void *);
-	p_len = ft_get_digits_u(p, 16) + 2; // +2追加
+	p = (t_ull)va_arg(*ap, void *);
+	p_len = ft_get_digits_u(p, 16) + 2;
 	padding = 0;
 	if (p < 0 && (p_len - 1) < spc->precision)
 		padding = spc->precision - (p_len - 1);

@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 17:17:24 by jkosaka           #+#    #+#             */
-/*   Updated: 2021/11/28 01:06:12 by jkosaka          ###   ########.fr       */
+/*   Updated: 2021/11/28 18:41:15 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	ft_putspace(t_spec *spc)
 int	ft_putstr(char *s)
 {
 	int	ret;
-	
+
 	ret = 0;
 	while (*s)
 	{

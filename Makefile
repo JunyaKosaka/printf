@@ -6,7 +6,7 @@
 #    By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/25 18:34:44 by jkosaka           #+#    #+#              #
-#    Updated: 2021/11/28 16:58:39 by jkosaka          ###   ########.fr        #
+#    Updated: 2021/11/28 18:47:17 by jkosaka          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,16 +37,16 @@ all	: $(NAME)
 bonus : all
 
 clean :
+	make clean -C ./libft
 	/bin/rm -rf $(OBJS) $(BNS_OBJS)
 
 fclean : clean
+	/bin/rm -rf ./libft/libft.a
 	/bin/rm -rf $(NAME)
 
 re : fclean all
 
 .PHONY : all clean fclean re bonus
-
-
 
 # SRCS = ft_parse_spec.c ft_print_c.c ft_print_d.c ft_print_lx.c \
 # 	ft_print_p.c ft_print_s.c ft_print_u.c ft_print_x.c ft_printf.c \

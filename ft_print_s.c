@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 18:02:19 by jkosaka           #+#    #+#             */
-/*   Updated: 2021/11/28 15:51:50 by jkosaka          ###   ########.fr       */
+/*   Updated: 2021/11/28 18:32:09 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,11 @@ static int	putnstr(char *str, int len)
 int	ft_print_s(t_spec *spc, va_list *ap)
 {
 	int		ret;
-	int		min_width;
 	int		precision;
 	int		s_len;
 	char	*str;
 
 	ret = 0;
-	min_width = spc->min_width;
 	precision = spc->precision;
 	str = va_arg(*ap, char *);
 	if (!str)
@@ -45,16 +43,16 @@ int	ft_print_s(t_spec *spc, va_list *ap)
 	s_len = ft_strlen(str);
 	if (0 <= precision && precision < s_len)
 		s_len = precision;
-	while (!(spc->has_left) && s_len < min_width)
+	while (!(spc->has_left) && s_len < spc->min_width)
 	{
 		ret += ft_putchar(' ');
-		min_width--;
+		spc->min_width--;
 	}
 	ret += putnstr(str, s_len);
-	while (s_len < min_width)
+	while (s_len < spc->min_width)
 	{
 		ret += ft_putchar(' ');
-		min_width--;
+		spc->min_width--;
 	}	
 	return (ret);
 }

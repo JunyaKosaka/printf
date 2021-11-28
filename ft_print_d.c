@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 23:21:59 by jkosaka           #+#    #+#             */
-/*   Updated: 2021/11/28 15:36:04 by jkosaka          ###   ########.fr       */
+/*   Updated: 2021/11/28 18:23:25 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,6 @@ static int	print_d_core(t_spec *spc, int d, int d_len, int padding)
 	int	ret;
 
 	ret = 0;
-	if (spc->has_plus && d >= 0)
-		spc->min_width--;
-	if (spc->has_space && d >= 0)
-		spc->min_width--;
 	if (spc->has_zero && d < 0)
 		ret += ft_putchar('-');
 	while (!(spc->has_left) && d_len < spc->min_width)
@@ -82,6 +78,10 @@ int	ft_print_d(t_spec *spc, va_list *ap)
 	else if (d_len < spc->precision)
 		padding = spc->precision - d_len;
 	d_len += padding;
+	if (spc->has_plus && d >= 0)
+		spc->min_width--;
+	if (spc->has_space && d >= 0)
+		spc->min_width--;
 	ret += print_d_core(spc, d, d_len, padding);
 	return (ret);
 }
