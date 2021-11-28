@@ -6,11 +6,11 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 17:17:24 by jkosaka           #+#    #+#             */
-/*   Updated: 2021/11/27 20:25:12 by jkosaka          ###   ########.fr       */
+/*   Updated: 2021/11/28 01:06:12 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libftprintf.h"
+#include "../ft_printf.h"
 
 int	ft_putchar(char c)
 {

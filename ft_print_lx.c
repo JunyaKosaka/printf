@@ -6,11 +6,11 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 00:35:55 by jkosaka           #+#    #+#             */
-/*   Updated: 2021/11/27 20:28:30 by jkosaka          ###   ########.fr       */
+/*   Updated: 2021/11/28 18:07:41 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 static int	put_lx(unsigned int num, int padding)
 {
@@ -58,14 +58,16 @@ int	ft_print_lx(t_spec *spc, va_list *ap)
 	ret = 0;
 	u = va_arg(*ap, unsigned int);
 	u_len = ft_get_digits(u, 16);
+	if (spc->has_sharp && u)
+		u_len += 2;
+	if (!u)
+		spc->has_sharp = 0;
 	if (spc->precision == 0 && u == 0)
 		u_len = 0;
 	padding = 0;
 	if (u_len < spc->precision)
 		padding = spc->precision - u_len;
 	u_len += padding;
-	if (spc->has_sharp)
-		spc->min_width -= 2;
 	ret += print_lx_core(spc, u, u_len, padding);
 	return (ret);
 }

@@ -6,13 +6,13 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 23:21:59 by jkosaka           #+#    #+#             */
-/*   Updated: 2021/11/27 11:27:28 by jkosaka          ###   ########.fr       */
+/*   Updated: 2021/11/28 15:36:04 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
-static int	putint(int n, int padding)
+static int	putint(int n, int padding, int has_zero)
 {
 	int			ret;
 	long long	num;
@@ -21,13 +21,14 @@ static int	putint(int n, int padding)
 	num = n;
 	if (num < 0)
 	{
-		ret += ft_putchar('-');
+		if (!has_zero)
+			ret += ft_putchar('-');
 		num *= -1;
 	}
 	while (padding-- > 0)
 		ret += ft_putchar('0');
 	if (num / 10)
-		ret += putint((int)(num / 10), 0);
+		ret += putint((int)(num / 10), 0, 0);
 	ret += ft_putchar('0' + (num % 10));
 	return (ret);
 }
@@ -41,6 +42,8 @@ static int	print_d_core(t_spec *spc, int d, int d_len, int padding)
 		spc->min_width--;
 	if (spc->has_space && d >= 0)
 		spc->min_width--;
+	if (spc->has_zero && d < 0)
+		ret += ft_putchar('-');
 	while (!(spc->has_left) && d_len < spc->min_width)
 	{
 		ret += ft_putspace(spc);
@@ -52,7 +55,7 @@ static int	print_d_core(t_spec *spc, int d, int d_len, int padding)
 		ret += ft_putchar('+');
 	if (spc->has_space && d >= 0)
 		ret += ft_putchar(' ');
-	ret += putint(d, padding);
+	ret += putint(d, padding, spc->has_zero);
 	while (d_len < spc->min_width)
 	{
 		ret += ft_putspace(spc);
@@ -76,7 +79,7 @@ int	ft_print_d(t_spec *spc, va_list *ap)
 	padding = 0;
 	if (d < 0 && (d_len - 1) < spc->precision)
 		padding = spc->precision - (d_len - 1);
-	else if (d >= 0 && d_len < spc->precision)
+	else if (d_len < spc->precision)
 		padding = spc->precision - d_len;
 	d_len += padding;
 	ret += print_d_core(spc, d, d_len, padding);

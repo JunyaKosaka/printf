@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libftprintf.h                                      :+:      :+:    :+:   */
+/*   ft_printf.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFTPRINTF_H
-# define LIBFTPRINTF_H
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -33,7 +33,7 @@ typedef struct s_spec
 	int	has_sharp;
 }	t_spec;
 
-int	ft_printf(const char *restrict format, ...);
+int	ft_printf(const char *format, ...);
 char *ft_parse_spec(t_spec *spc, char *ptr, va_list *ap);
 int	ft_print_s(t_spec *spc, va_list *ap);
 int	ft_print_c(t_spec *spc, va_list *ap);
@@ -47,5 +47,6 @@ int	ft_putchar(char c);
 int	ft_putstr(char *s);
 int	ft_putspace(t_spec *spc);
 int	ft_get_digits(long x, int base);
+int	ft_get_digits_u(unsigned long long num, int base);
 
-#endif // LIBFTPRINTF_H_
+#endif // FT_PRINTF_H_

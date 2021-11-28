@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libftprintf.c                                      :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/31 23:42:38 by jkosaka           #+#    #+#             */
-/*   Updated: 2021/11/27 18:42:14 by jkosaka          ###   ########.fr       */
+/*   Updated: 2021/11/28 01:09:01 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 static int	print_spec(t_spec *spc, va_list *ap)
 {
@@ -55,26 +55,27 @@ static int	ft_printf_core(char *ptr, va_list ap)
 	{
 		if (*ptr == '%' && *(ptr+1) == '%')
 		{
-			ret += ft_putchar('%'); // 確認
+			ret += ft_putchar('%');
 			ptr += 2;
-			continue ;
 		}
-		if (*ptr == '%')
+		else if (*ptr == '%')
 		{
 			init_spc(&spc);
 			ptr = ft_parse_spec(&spc, ptr, &ap);
 			if (!ptr)
 				return (-1);
 			ret += print_spec(&spc, &ap);
-			continue ;
 		}
-		ret += ft_putchar(*ptr); // %d%d　対応
-		ptr++;
+		else
+		{
+			ret += ft_putchar(*ptr);
+			ptr++;
+		}
 	}
 	return (ret);
 }
 
-int	ft_printf(const char *restrict format, ...)
+int	ft_printf(const char *format, ...)
 {
 	char	*ptr;
 	int		ret;

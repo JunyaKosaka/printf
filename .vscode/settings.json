@@ -3,6 +3,7 @@
 		"cspdiux",
 		"ft",
 		"putlxint",
+		"putnstr",
 		"striteri"
 	],
 	"C_Cpp.dimInactiveRegions": false

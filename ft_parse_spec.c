@@ -6,13 +6,13 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 15:28:22 by jkosaka           #+#    #+#             */
-/*   Updated: 2021/11/27 18:38:06 by jkosaka          ###   ########.fr       */
+/*   Updated: 2021/11/28 18:17:03 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
-static char	*parse_flag(t_spec *spc, char **ptr, va_list *ap)
+static char	*parse_flag(t_spec *spc, char **ptr)
 {
 	while (strchr("0-#+ ", **ptr))
 	{
@@ -52,6 +52,7 @@ static char	*parse_dot(t_spec *spc, char **ptr, va_list *ap)
 {
 	if (**ptr == '.')
 	{
+		spc->precision = 0;
 		(*ptr)++;
 		if (ft_isdigit(**ptr))
 		{
@@ -70,7 +71,7 @@ static char	*parse_dot(t_spec *spc, char **ptr, va_list *ap)
 char	*ft_parse_spec(t_spec *spc, char *ptr, va_list *ap)
 {
 	ptr++;
-	ptr = parse_flag(spc, &ptr, ap);
+	ptr = parse_flag(spc, &ptr);
 	ptr = parse_min_width(spc, &ptr, ap);
 	if (!ptr)
 		return (NULL);

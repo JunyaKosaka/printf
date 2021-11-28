@@ -6,11 +6,11 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 00:35:55 by jkosaka           #+#    #+#             */
-/*   Updated: 2021/11/27 00:42:37 by jkosaka          ###   ########.fr       */
+/*   Updated: 2021/11/28 01:06:12 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 static int	putuint(unsigned int num, int padding)
 {
