@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 15:28:22 by jkosaka           #+#    #+#             */
-/*   Updated: 2021/11/29 14:21:46 by jkosaka          ###   ########.fr       */
+/*   Updated: 2021/11/29 20:07:15 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static char	*parse_flag(t_spec *spc, char **ptr)
 	return (*ptr);
 }
 
-static char	*parse_min_width(t_spec *spc, char **ptr, va_list *ap)
+static char	*parse_min_width(t_spec *spc, char **ptr, va_list *app)
 {
 	if (ft_isdigit(**ptr))
 	{
@@ -42,13 +42,13 @@ static char	*parse_min_width(t_spec *spc, char **ptr, va_list *ap)
 	}
 	else if (**ptr == '*')
 	{
-		spc->min_width = va_arg(*ap, int);
+		spc->min_width = va_arg(*app, int);
 		(*ptr)++;
 	}
 	return (*ptr);
 }
 
-static char	*parse_dot(t_spec *spc, char **ptr, va_list *ap)
+static char	*parse_dot(t_spec *spc, char **ptr, va_list *app)
 {
 	if (**ptr == '.')
 	{
@@ -61,7 +61,7 @@ static char	*parse_dot(t_spec *spc, char **ptr, va_list *ap)
 		}
 		else if (**ptr == '*')
 		{
-			spc->precision = va_arg(*ap, int);
+			spc->precision = va_arg(*app, int);
 			(*ptr)++;
 		}
 	}
@@ -80,15 +80,15 @@ static void	init_spc(t_spec *spc)
 	spc->has_plus = 0;
 }
 
-char	*ft_parse_spec(t_spec *spc, char *ptr, va_list *ap)
+char	*ft_parse_spec(t_spec *spc, char *ptr, va_list *app)
 {
 	ptr++;
 	init_spc(spc);
 	ptr = parse_flag(spc, &ptr);
-	ptr = parse_min_width(spc, &ptr, ap);
+	ptr = parse_min_width(spc, &ptr, app);
 	if (!ptr)
 		return (NULL);
-	ptr = parse_dot(spc, &ptr, ap);
+	ptr = parse_dot(spc, &ptr, app);
 	if (spc->left_align || spc->precision >= 0)
 		spc->has_zero = 0;
 	if (spc->has_plus)
