@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/31 23:42:38 by jkosaka           #+#    #+#             */
-/*   Updated: 2021/11/29 20:46:55 by jkosaka          ###   ########.fr       */
+/*   Updated: 2021/11/29 21:16:32 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,16 @@ static int	print_spec(t_spec *spc, va_list ap)
 	return (0);
 }
 
-static int	convert_to_int(size_t n)
+static int	check(int n)
 {
-	if (n >= INT_MAX)
+	if (n == INT_MAX)
 		return (-1);
 	return ((int)n);
 }
 
 static int	ft_printf_core(char *ptr, va_list ap)
 {
-	size_t	ret;
+	int		ret;
 	size_t	temp;
 	t_spec	spc;
 
@@ -65,7 +65,7 @@ static int	ft_printf_core(char *ptr, va_list ap)
 		ret += ft_putchar(*ptr);
 		ptr++;
 	}
-	return (convert_to_int(ret));
+	return (check(ret));
 }
 
 int	ft_printf(const char *format, ...)
