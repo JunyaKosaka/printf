@@ -34,14 +34,14 @@ typedef struct s_spec
 typedef unsigned long long	t_ull;
 
 int		ft_printf(const char *format, ...);
-char	*ft_parse_spec(t_spec *spc, char *ptr, va_list *ap);
-int		ft_print_s(t_spec *spc, va_list *ap);
-int		ft_print_c(t_spec *spc, va_list *ap);
-int		ft_print_d(t_spec *spc, va_list *ap);
-int		ft_print_u(t_spec *spc, va_list *ap);
-int		ft_print_p(t_spec *spc, va_list *ap);
-int		ft_print_x(t_spec *spc, va_list *ap);
-int		ft_print_lx(t_spec *spc, va_list *ap);
+char	*ft_parse_spec(t_spec *spc, char *ptr, va_list ap);
+int		ft_print_s(t_spec *spc, va_list ap);
+int		ft_print_c(t_spec *spc, va_list ap);
+int		ft_print_d(t_spec *spc, va_list ap);
+int		ft_print_u(t_spec *spc, va_list ap);
+int		ft_print_p(t_spec *spc, va_list ap);
+int		ft_print_x(t_spec *spc, va_list ap);
+int		ft_print_lx(t_spec *spc, va_list ap);
 int		ft_putchar(char c);
 int		ft_putstr(char *s);
 int		ft_putspace(t_spec *spc);
