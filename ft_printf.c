@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/31 23:42:38 by jkosaka           #+#    #+#             */
-/*   Updated: 2021/11/28 18:36:49 by jkosaka          ###   ########.fr       */
+/*   Updated: 2021/11/29 10:41:30 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	init_spc(t_spec *spc)
 	spc->c = 0;
 	spc->min_width = -1;
 	spc->precision = -1;
-	spc->has_left = 0;
+	spc->left_align = 0;
 	spc->has_zero = 0;
 	spc->has_sharp = 0;
 	spc->has_space = 0;
@@ -53,7 +53,7 @@ static int	ft_printf_core(char *ptr, va_list ap)
 	ret = 0;
 	while (*ptr)
 	{
-		if (*ptr == '%' && *(ptr + 1) == '%')
+		if (*ptr == '%' && *(ptr + 1) == '%') // %%
 		{
 			ret += ft_putchar('%');
 			ptr += 2;
@@ -82,8 +82,8 @@ int	ft_printf(const char *format, ...)
 
 	ret = 0;
 	ptr = (char *)format;
-	if (!ptr)
-		return (0);
+	if (!ptr) // 不要？
+		return (0); 
 	va_start(ap, format);
 	ret += ft_printf_core(ptr, ap);
 	va_end(ap);

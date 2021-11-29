@@ -6,7 +6,7 @@
 #    By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/25 18:34:44 by jkosaka           #+#    #+#              #
-#    Updated: 2021/11/28 18:47:17 by jkosaka          ###   ########.fr        #
+#    Updated: 2021/11/29 01:51:18 by jkosaka          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,6 @@ SRCS = ft_parse_spec.c ft_print_c.c ft_print_d.c ft_print_lx.c \
 	./utils/ft_get_digits.c ./utils/ft_putchr.c
 
 OBJS = $(SRCS:%.c=%.o)
-
-BNS_OBJS = $(BONUS:%.c=%.o)
 
 FLAGS = -Wall -Wextra -Werror
 
@@ -38,7 +36,7 @@ bonus : all
 
 clean :
 	make clean -C ./libft
-	/bin/rm -rf $(OBJS) $(BNS_OBJS)
+	/bin/rm -rf $(OBJS)
 
 fclean : clean
 	/bin/rm -rf ./libft/libft.a

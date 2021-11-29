@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 00:35:43 by jkosaka           #+#    #+#             */
-/*   Updated: 2021/11/28 18:28:22 by jkosaka          ###   ########.fr       */
+/*   Updated: 2021/11/29 01:31:17 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,14 @@ static int	print_p_core(t_spec *spc, t_ull p, int p_len, int padding)
 	int	ret;
 
 	ret = 0;
-	while (!(spc->has_left) && p_len < spc->min_width)
+	while (!(spc->left_align) && p_len < spc->min_width)
 	{
 		ret += ft_putspace(spc);
 		spc->min_width--;
 	}
 	if (spc->precision == 0 && p == 0)
 		return (ret);
-	while (!(spc->has_left) && p_len < spc->min_width)
+	while (!(spc->left_align) && p_len < spc->min_width)
 	{
 		ret += ft_putchar(' ');
 		spc->min_width--;

@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 23:09:25 by jkosaka           #+#    #+#             */
-/*   Updated: 2021/11/28 01:32:33 by jkosaka          ###   ########.fr       */
+/*   Updated: 2021/11/29 01:31:17 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_print_c(t_spec *spc, va_list *ap)
 
 	ret = 0;
 	c = va_arg(*ap, int);
-	while (!(spc->has_left) && spc->min_width > 1)
+	while (!(spc->left_align) && spc->min_width > 1)
 	{
 		ret += ft_putchar(' ');
 		spc->min_width--;

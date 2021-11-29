@@ -26,7 +26,7 @@ typedef struct s_spec
 	int	c;
 	int	min_width;
 	int	precision;
-	int	has_left;
+	int	left_align;
 	int	has_zero;
 	int	has_plus;
 	int	has_space;

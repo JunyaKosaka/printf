@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 15:28:22 by jkosaka           #+#    #+#             */
-/*   Updated: 2021/11/28 18:17:03 by jkosaka          ###   ########.fr       */
+/*   Updated: 2021/11/29 02:00:14 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static char	*parse_flag(t_spec *spc, char **ptr)
 		if (**ptr == '0')
 			spc->has_zero = 1;
 		else if (**ptr == '-')
-			spc->has_left = 1;
+			spc->left_align = 1;
 		else if (**ptr == '#')
 			spc->has_sharp = 1;
 		else if (**ptr == '+')
@@ -76,7 +76,7 @@ char	*ft_parse_spec(t_spec *spc, char *ptr, va_list *ap)
 	if (!ptr)
 		return (NULL);
 	ptr = parse_dot(spc, &ptr, ap);
-	if (spc->has_left || spc->precision >= 0)
+	if (spc->left_align || spc->precision >= 0)
 		spc->has_zero = 0;
 	if (spc->has_plus)
 		spc->has_space = 0;

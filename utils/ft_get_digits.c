@@ -6,13 +6,13 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 18:17:29 by jkosaka           #+#    #+#             */
-/*   Updated: 2021/11/28 18:40:54 by jkosaka          ###   ########.fr       */
+/*   Updated: 2021/11/29 10:47:17 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
 
-int	ft_get_digits(long long num, int base)
+int	ft_get_digits(long long num, int base) // LONG_MIN?
 {
 	int		ret;
 
@@ -32,11 +32,6 @@ int	ft_get_digits_u(unsigned long long num, int base)
 	int		ret;
 
 	ret = 1;
-	if (num < 0)
-	{
-		num *= -1;
-		ret++;
-	}
 	if (num / base)
 		ret += ft_get_digits(num / base, base);
 	return (ret);
