@@ -6,13 +6,13 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/31 23:42:38 by jkosaka           #+#    #+#             */
-/*   Updated: 2021/11/29 20:02:47 by jkosaka          ###   ########.fr       */
+/*   Updated: 2021/11/29 20:46:55 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	print_spec(t_spec *spc, va_list *ap)
+static int	print_spec(t_spec *spc, va_list ap)
 {
 	if (spc->c == 'c')
 		return (ft_print_c(spc, ap));
@@ -53,10 +53,10 @@ static int	ft_printf_core(char *ptr, va_list ap)
 			ptr++;
 		else if (*ptr == '%')
 		{
-			ptr = ft_parse_spec(&spc, ptr, &ap);
+			ptr = ft_parse_spec(&spc, ptr, ap);
 			if (!ptr)
 				return (-1);
-			temp = print_spec(&spc, &ap);
+			temp = print_spec(&spc, ap);
 			if (INT_MAX - ret <= temp)
 				return (-1);
 			ret += temp;

@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 00:35:55 by jkosaka           #+#    #+#             */
-/*   Updated: 2021/11/29 01:31:17 by jkosaka          ###   ########.fr       */
+/*   Updated: 2021/11/29 20:46:55 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static int	print_x_core(t_spec *spc, unsigned int u, int u_len, int padding)
 	return (ret);
 }
 
-int	ft_print_x(t_spec *spc, va_list *ap)
+int	ft_print_x(t_spec *spc, va_list ap)
 {
 	int				ret;
 	int				u_len;
@@ -59,7 +59,7 @@ int	ft_print_x(t_spec *spc, va_list *ap)
 	unsigned int	u;
 
 	ret = 0;
-	u = va_arg(*ap, unsigned int);
+	u = va_arg(ap, unsigned int);
 	u_len = ft_get_digits(u, 16);
 	if (spc->has_sharp && u)
 		u_len += 2;

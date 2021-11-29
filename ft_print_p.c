@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 00:35:43 by jkosaka           #+#    #+#             */
-/*   Updated: 2021/11/29 11:32:38 by jkosaka          ###   ########.fr       */
+/*   Updated: 2021/11/29 20:46:55 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static int	print_p_core(t_spec *spc, t_ull p, int p_len, int padding)
 	return (ret);
 }
 
-int	ft_print_p(t_spec *spc, va_list *ap)
+int	ft_print_p(t_spec *spc, va_list ap)
 {
 	int		ret;
 	t_ull	p;
@@ -60,7 +60,7 @@ int	ft_print_p(t_spec *spc, va_list *ap)
 	int		padding;
 
 	ret = 0;
-	p = (t_ull)va_arg(*ap, void *);
+	p = (t_ull)va_arg(ap, void *);
 	p_len = ft_get_digits_u(p, 16) + 2;
 	padding = 0;
 	if (p < 0 && (p_len - 1) < spc->precision)

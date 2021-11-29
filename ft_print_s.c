@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 18:02:19 by jkosaka           #+#    #+#             */
-/*   Updated: 2021/11/29 19:47:19 by jkosaka          ###   ########.fr       */
+/*   Updated: 2021/11/29 20:46:55 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ static int	putnstr(char *str, int len)
 	return (ret);
 }
 
-int	ft_print_s(t_spec *spc, va_list *ap)
+int	ft_print_s(t_spec *spc, va_list ap)
 {
 	int		ret;
 	size_t	s_len;
 	char	*str;
 
 	ret = 0;
-	str = va_arg(*ap, char *);
+	str = va_arg(ap, char *);
 	if (!str)
 		str = "(null)";
 	s_len = ft_strlen(str);
