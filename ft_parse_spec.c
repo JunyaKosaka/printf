@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 15:28:22 by jkosaka           #+#    #+#             */
-/*   Updated: 2021/11/29 02:00:14 by jkosaka          ###   ########.fr       */
+/*   Updated: 2021/11/29 14:21:46 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,22 @@ static char	*parse_dot(t_spec *spc, char **ptr, va_list *ap)
 	return (*ptr);
 }
 
+static void	init_spc(t_spec *spc)
+{
+	spc->c = 0;
+	spc->min_width = -1;
+	spc->precision = -1;
+	spc->left_align = 0;
+	spc->has_zero = 0;
+	spc->has_sharp = 0;
+	spc->has_space = 0;
+	spc->has_plus = 0;
+}
+
 char	*ft_parse_spec(t_spec *spc, char *ptr, va_list *ap)
 {
 	ptr++;
+	init_spc(spc);
 	ptr = parse_flag(spc, &ptr);
 	ptr = parse_min_width(spc, &ptr, ap);
 	if (!ptr)

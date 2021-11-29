@@ -6,13 +6,11 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 00:35:43 by jkosaka           #+#    #+#             */
-/*   Updated: 2021/11/29 01:31:17 by jkosaka          ###   ########.fr       */
+/*   Updated: 2021/11/29 11:32:38 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-typedef unsigned long long	t_ull;
 
 static int	put_x(t_ull num, int padding)
 {

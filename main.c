@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 15:08:07 by jkosaka           #+#    #+#             */
-/*   Updated: 2021/11/28 16:58:16 by jkosaka          ###   ########.fr       */
+/*   Updated: 2021/11/29 14:25:30 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ res = printf(__VA_ARGS__)
 int	main(void)
 {
 	int	res;
+	F("[%@]\n");
 	// F("[%-11p ++%-12p]\n", INT_MIN, INT_MAX);
 	F("[%-13p ++%-14p]\n", ULONG_MAX, -ULONG_MAX);
 	F("[%-13p]\n", ULONG_MAX);

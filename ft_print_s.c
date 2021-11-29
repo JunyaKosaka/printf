@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 18:02:19 by jkosaka           #+#    #+#             */
-/*   Updated: 2021/11/29 01:31:17 by jkosaka          ###   ########.fr       */
+/*   Updated: 2021/11/29 11:13:51 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,6 @@ int	ft_print_s(t_spec *spc, va_list *ap)
 	{
 		ret += ft_putchar(' ');
 		spc->min_width--;
-	}	
+	}
 	return (ret);
 }
