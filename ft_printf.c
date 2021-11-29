@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/31 23:42:38 by jkosaka           #+#    #+#             */
-/*   Updated: 2021/11/29 13:45:09 by jkosaka          ###   ########.fr       */
+/*   Updated: 2021/11/29 19:44:13 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,23 +43,23 @@ static int	convert_to_int(size_t n)
 static int	ft_printf_core(char *ptr, va_list ap)
 {
 	size_t	ret;
+	size_t	temp;
 	t_spec	spc;
 
 	ret = 0;
 	while (*ptr && ret < INT_MAX)
 	{
 		if (*ptr == '%' && *(ptr + 1) == '%')
-		{
-			ret += ft_putchar('%');
-			ptr += 2;
-			continue ;
-		}
+			ptr++;
 		else if (*ptr == '%')
 		{
 			ptr = ft_parse_spec(&spc, ptr, &ap);
 			if (!ptr)
 				return (-1);
-			ret += print_spec(&spc, &ap);
+			temp = print_spec(&spc, &ap);
+			if (INT_MAX - ret <= temp)
+				return (-1);
+			ret += temp;
 			continue ;
 		}
 		ret += ft_putchar(*ptr);
