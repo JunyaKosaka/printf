@@ -63,6 +63,7 @@ int	ft_print_p(t_spec *spc, va_list ap)
 	p = (t_ull)va_arg(ap, void *);
 	p_len = ft_get_digits_u(p, 16) + 2;
 	padding = 0;
+	// printf("\n66:%llu\n", p);
 	if (p < 0 && (p_len - 1) < spc->precision)
 		padding = spc->precision - (p_len - 1);
 	else if (p >= 0 && p_len < spc->precision)

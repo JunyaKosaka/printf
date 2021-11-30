@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include <limits.h>
 # include <stdarg.h>
+# include <stdio.h>
 # include "./libft/libft.h"
 
 typedef struct s_spec
@@ -47,5 +48,6 @@ int		ft_putstr(char *s);
 int		ft_putspace(t_spec *spc);
 int		ft_get_digits(long long x, int base);
 int		ft_get_digits_u(unsigned long long num, int base);
+int		ft_foundchr(const char *s, int c);
 
 #endif // FT_PRINTF_H

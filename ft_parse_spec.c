@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 15:28:22 by jkosaka           #+#    #+#             */
-/*   Updated: 2021/11/29 21:57:43 by jkosaka          ###   ########.fr       */
+/*   Updated: 2021/11/30 20:49:59 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static char	*parse_flag(t_spec *spc, char **ptr)
 {
-	while (strchr("0-#+ ", **ptr))
+	while (ft_foundchr("0-#+ ", **ptr))
 	{
 		if (**ptr == '0')
 			spc->has_zero = 1;
@@ -52,8 +52,9 @@ static char	*parse_dot(t_spec *spc, char **ptr, va_list ap)
 {
 	if (**ptr == '.')
 	{
+		while (**ptr == '.')
+			(*ptr)++;
 		spc->precision = 0;
-		(*ptr)++;
 		if (ft_isdigit(**ptr))
 		{
 			spc->precision = ft_atoi(*ptr);
@@ -93,7 +94,7 @@ char	*ft_parse_spec(t_spec *spc, char *ptr, va_list ap)
 		spc->has_zero = 0;
 	if (spc->has_plus)
 		spc->has_space = 0;
-	if (ft_strchr("cspdiuxX", *ptr))
+	if (ft_foundchr("cspdiuxX%", *ptr))
 	{
 		spc->c = *ptr;
 		return (++ptr);

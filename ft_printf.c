@@ -30,6 +30,8 @@ static int	print_spec(t_spec *spc, va_list ap)
 		return (ft_print_x(spc, ap));
 	if (spc->c == 'X')
 		return (ft_print_lx(spc, ap));
+	if (spc->c == '%')
+		return (ft_putchar('%'));
 	return (0);
 }
 
@@ -49,9 +51,9 @@ static int	ft_printf_core(char *ptr, va_list ap)
 	ret = 0;
 	while (*ptr && ret < INT_MAX)
 	{
-		if (*ptr == '%' && *(ptr + 1) == '%')
-			ptr++;
-		else if (*ptr == '%')
+		// if (*ptr == '%' && *(ptr + 1) == '%')
+		// 	ptr++;
+		if (*ptr == '%')
 		{
 			ptr = ft_parse_spec(&spc, ptr, ap);
 			if (!ptr)
