@@ -6,20 +6,11 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 18:02:19 by jkosaka           #+#    #+#             */
-/*   Updated: 2021/12/01 18:29:40 by jkosaka          ###   ########.fr       */
+/*   Updated: 2021/12/01 22:48:25 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-static int	putnstr(char *str, int len)
-{
-	if (!str)
-		return (0);
-	str[len] = '\0';
-	ft_putstr_fd(str, 1);
-	return (len);
-}
 
 int	ft_print_s(t_spec *spc, va_list ap)
 {
@@ -33,7 +24,7 @@ int	ft_print_s(t_spec *spc, va_list ap)
 		str = "(null)";
 	s_len = ft_strlen(str);
 	if (s_len > INT_MAX)
-		s_len = INT_MAX;
+		return (INT_MAX);
 	if (0 <= spc->precision && spc->precision < (int)s_len)
 		s_len = spc->precision;
 	while (!(spc->left_align) && (int)s_len < spc->min_width)
@@ -41,7 +32,8 @@ int	ft_print_s(t_spec *spc, va_list ap)
 		ret += ft_putspace(spc);
 		spc->min_width--;
 	}
-	ret += putnstr(str, s_len);
+	ft_putstr_fd(str, 1);
+	ret += s_len;
 	while ((int)s_len < spc->min_width)
 	{
 		ret += ft_putspace(spc);
