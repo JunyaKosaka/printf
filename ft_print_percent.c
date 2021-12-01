@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 00:31:34 by jkosaka           #+#    #+#             */
-/*   Updated: 2021/12/01 00:45:55 by jkosaka          ###   ########.fr       */
+/*   Updated: 2021/12/01 20:46:33 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	ft_print_percent(t_spec *spc)
 {
 	int	ret;
 	int	percent_len;
-	
+
 	ret = 0;
 	percent_len = 1;
 	while (!(spc->left_align) && percent_len < spc->min_width)
