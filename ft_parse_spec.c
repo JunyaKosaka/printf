@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 15:28:22 by jkosaka           #+#    #+#             */
-/*   Updated: 2021/12/01 18:19:25 by jkosaka          ###   ########.fr       */
+/*   Updated: 2021/12/01 21:11:37 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ static char	*parse_dot(t_spec *spc, char **ptr, va_list ap)
 		if (ft_isdigit(**ptr))
 		{
 			spc->precision = ft_atoi(*ptr);
+			if (spc->precision == -1)
+				return (NULL);
 			*ptr += ft_get_digits(spc->precision, 10);
 		}
 		else if (**ptr == '*')
@@ -90,6 +92,8 @@ char	*ft_parse_spec(t_spec *spc, char *ptr, va_list ap)
 	if (!ptr)
 		return (NULL);
 	ptr = parse_dot(spc, &ptr, ap);
+	if (!ptr)
+		return (NULL);
 	if (spc->left_align || spc->precision >= 0)
 		spc->has_zero = 0;
 	if (spc->has_plus)
