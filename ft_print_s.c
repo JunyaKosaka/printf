@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 18:02:19 by jkosaka           #+#    #+#             */
-/*   Updated: 2021/12/01 23:04:20 by jkosaka          ###   ########.fr       */
+/*   Updated: 2021/12/01 23:07:56 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 
 static int	putnstr(char *str, int len)
 {
-	if (len >= INT_MAX)
-		return (INT_MAX);
-	ft_putstr_fd(str, 1);
+	if (len < INT_MAX)
+		ft_putstr_fd(str, 1);
 	return (len);
 }
 
