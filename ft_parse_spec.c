@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 15:28:22 by jkosaka           #+#    #+#             */
-/*   Updated: 2021/11/30 20:49:59 by jkosaka          ###   ########.fr       */
+/*   Updated: 2021/12/01 18:19:25 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static char	*parse_flag(t_spec *spc, char **ptr)
 {
-	while (ft_foundchr("0-#+ ", **ptr))
+	while (**ptr && ft_strchr("0-#+ ", **ptr))
 	{
 		if (**ptr == '0')
 			spc->has_zero = 1;
@@ -94,7 +94,7 @@ char	*ft_parse_spec(t_spec *spc, char *ptr, va_list ap)
 		spc->has_zero = 0;
 	if (spc->has_plus)
 		spc->has_space = 0;
-	if (ft_foundchr("cspdiuxX%", *ptr))
+	if (*ptr && ft_strchr("cspdiuxX%", *ptr))
 	{
 		spc->c = *ptr;
 		return (++ptr);

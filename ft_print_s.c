@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 18:02:19 by jkosaka           #+#    #+#             */
-/*   Updated: 2021/11/29 20:46:55 by jkosaka          ###   ########.fr       */
+/*   Updated: 2021/12/01 18:29:40 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,11 @@
 
 static int	putnstr(char *str, int len)
 {
-	int	ret;
-
-	ret = 0;
 	if (!str)
 		return (0);
-	while (*str && len > 0)
-	{
-		ret += ft_putchar(*str);
-		str++;
-		len--;
-	}
-	return (ret);
+	str[len] = '\0';
+	ft_putstr_fd(str, 1);
+	return (len);
 }
 
 int	ft_print_s(t_spec *spc, va_list ap)
@@ -40,18 +33,18 @@ int	ft_print_s(t_spec *spc, va_list ap)
 		str = "(null)";
 	s_len = ft_strlen(str);
 	if (s_len > INT_MAX)
-		return (INT_MAX);
+		s_len = INT_MAX;
 	if (0 <= spc->precision && spc->precision < (int)s_len)
 		s_len = spc->precision;
 	while (!(spc->left_align) && (int)s_len < spc->min_width)
 	{
-		ret += ft_putchar(' ');
+		ret += ft_putspace(spc);
 		spc->min_width--;
 	}
 	ret += putnstr(str, s_len);
 	while ((int)s_len < spc->min_width)
 	{
-		ret += ft_putchar(' ');
+		ret += ft_putspace(spc);
 		spc->min_width--;
 	}
 	return (ret);
