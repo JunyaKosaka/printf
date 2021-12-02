@@ -46,6 +46,7 @@ int		ft_print_percent(t_spec *spc);
 int		ft_putchar(char c);
 int		ft_putstr(char *s);
 int		ft_putspace(t_spec *spc);
+int		ft_putspaces(t_spec *spc, int num_width);
 int		ft_get_digits(long long x, int base);
 int		ft_get_digits_u(unsigned long long num, int base);
 
